@@ -71,7 +71,9 @@ module Jekyll
         Document.new(doc.path, :site => site, :collection => collection).tap do |new_doc|
           new_doc.read
           new_doc.data["layout"] = layout
-          new_doc.data["permalink"] = PermalinkBuilder.get_adjusted_permalink(doc, layout)
+          if layout != "post"
+            new_doc.data["permalink"] = PermalinkBuilder.get_adjusted_permalink(doc, layout)
+          end
         end
       end
     end
