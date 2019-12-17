@@ -41,7 +41,9 @@ module Jekyll
         dir = File.dirname(page.relative_path)
         Page.new(page.site, page.site.source, dir, page.name).tap do |new_page|
           new_page.data["layout"] = layout
-          new_page.data["permalink"] = PermalinkBuilder.get_adjusted_permalink(page, layout)
+          if layout != 'post'
+            new_page.data["permalink"] = PermalinkBuilder.get_adjusted_permalink(page, layout)
+          end
         end
       end
     end
